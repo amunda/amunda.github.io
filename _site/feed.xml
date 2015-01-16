@@ -5,45 +5,179 @@
     <atom:link href="http://www.sortedarray.com/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://www.sortedarray.com/</link>
     <description>A website with blog posts, and pages.</description>
-    <pubDate>Wed, 14 Jan 2015 09:22:50 -0500</pubDate>
+    <pubDate>Thu, 15 Jan 2015 22:20:01 -0500</pubDate>
     
       <item>
-        <title>Sample post</title>
-        <link>http://www.sortedarray.com/2014/11/30/sample-post.html</link>
-        <guid isPermaLink="true">http://www.sortedarray.com/2014/11/30/sample-post.html</guid>
-        <description>&lt;p&gt;Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.&lt;/p&gt;
+        <title>Breakdown of Bootstrap Plugin</title>
+        <link>http://www.sortedarray.com/breakdown-of-bootstrap-plugin</link>
+        <guid isPermaLink="true">http://www.sortedarray.com/breakdown-of-bootstrap-plugin</guid>
+        <description>&lt;p&gt;Most of the Bootstrap javascript plugins like Modal, Dropdown and others share the same basic template. I wanted to extract that template out from their js plugin and explain each part. Here is the basic template extracted from &lt;a title=&quot;modal.js&quot; href=&quot;https://github.com/twbs/bootstrap/blob/master/js/modal.js&quot;&gt;modal.js&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;
+  
+  &#39;use strict&#39;;
 
-&lt;ul&gt;
-  &lt;li&gt;Consectetur adipiscing elit&lt;/li&gt;
-  &lt;li&gt;Donec a diam lectus&lt;/li&gt;
-  &lt;li&gt;Sed sit amet ipsum mauris&lt;/li&gt;
-&lt;/ul&gt;
+  // MODAL CLASS DEFINITION
+  // ======================
 
-&lt;p&gt;Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.&lt;/p&gt;
+  var Modal = function (element, options) {
+    this.options        = options
+    this.$body          = $(document.body)
+    ...
+  }
 
-&lt;p&gt;Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula &lt;em&gt;semper consectetur sagittis&lt;/em&gt;, nisi diam iaculis velit, id fringilla sem nunc vel mi. Nam dictum, odio nec pretium volutpat, arcu ante placerat erat, non tristique elit urna et turpis. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci. Fusce eget orci a orci congue vestibulum.&lt;/p&gt;
+  Modal.VERSION  = &#39;3.2.0&#39;
 
-&lt;p&gt;Ut dolor diam, elementum et vestibulum eu, porttitor vel elit. Curabitur venenatis pulvinar tellus gravida ornare. Sed et erat faucibus nunc euismod ultricies ut id justo. Nullam cursus suscipit nisi, et ultrices justo sodales nec. Fusce venenatis facilisis lectus ac semper. Aliquam at massa ipsum. Quisque bibendum purus convallis nulla ultrices ultricies. Nullam aliquam, mi eu aliquam tincidunt, purus velit laoreet tortor, viverra pretium nisi quam vitae mi. Fusce vel volutpat elit. Nam sagittis nisi dui.&lt;/p&gt;
+  Modal.DEFAULTS = {
+    backdrop: true,
+    keyboard: true,
+    show: true
+  }
 
-&lt;blockquote&gt;
-  &lt;p&gt;Suspendisse lectus leo, consectetur in tempor sit amet, placerat quis neque&lt;/p&gt;
-&lt;/blockquote&gt;
+   Modal.prototype.show = function (_relatedTarget) {
+     ....
+   }
 
-&lt;p&gt;Etiam luctus porttitor lorem, sed suscipit est rutrum non. Curabitur lobortis nisl a enim congue semper. Aenean commodo ultrices imperdiet. Vestibulum ut justo vel sapien venenatis tincidunt.&lt;/p&gt;
+  // MODAL PLUGIN DEFINITION
+  // =======================
 
-&lt;p&gt;Phasellus eget dolor sit amet ipsum dapibus condimentum vitae quis lectus. Aliquam ut massa in turpis dapibus convallis. Praesent elit lacus, vestibulum at malesuada et, ornare et est. Ut augue nunc, sodales ut euismod non, adipiscing vitae orci. Mauris ut placerat justo. Mauris in ultricies enim. Quisque nec est eleifend nulla ultrices egestas quis ut quam. Donec sollicitudin lectus a mauris pulvinar id aliquam urna cursus. Cras quis ligula sem, vel elementum mi. Phasellus non ullamcorper urna.&lt;/p&gt;
+  function Plugin(option, _relatedTarget) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data(&#39;bs.modal&#39;)
+      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == &#39;object&#39; &amp;amp;&amp;amp; option)
+
+      if (!data) $this.data(&#39;bs.modal&#39;, (data = new Modal(this, options)))
+      if (typeof option == &#39;string&#39;) data[option](_relatedTarget)
+      else if (options.show) data.show(_relatedTarget)
+    })
+  }
+
+  var old = $.fn.modal
+
+  $.fn.modal             = Plugin
+  $.fn.modal.Constructor = Modal
+
+
+  // MODAL NO CONFLICT
+  // =================
+
+  $.fn.modal.noConflict = function () {
+    $.fn.modal = old
+    return this
+  }
+
+  ....
+
+}(jQuery);
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&#39;s break this template further and look at each of the parts separately:&lt;/p&gt;
+&lt;h3&gt; 1. Self Invoking Function:&lt;/h3&gt;
+&lt;pre class=&quot;lang:ruby decode:true &quot;&gt;+function ($) {
+ ...
+}(jQuery)&lt;/pre&gt;
+&lt;p&gt;Self-invoking functions are the functions which get invoked as soon as it gets defined. They create a scope for all the variables and functions defined within the function so they don&#39;t leak to global scope.&lt;/p&gt;
+&lt;p&gt;Another interesting thing about this function is that it is starting with the plus sign &#39;+&#39;.  The reason for this is to make parser think that it is function expression instead of function statement. Whenever javascript parser sees &#39;function&#39; at the start of the line it considers that as function statement. Function statement requires that function should have name and also you cannot end the function statement with parenthesis like &#39;(jquery)&#39;. Function expression on the other-hand can be anonymous and you can invoke them right away by putting parenthesis at the end. Putting any operator like +, -, ! etc. in front of the function will make parser think that it&#39;s function expression.&lt;/p&gt;
+&lt;p&gt;Lastly, you have notice that we actually pass &#39;jQuery&#39; to the function and make parameter name to be &#39;$&#39;. This way we can reference jQuery within function with &#39;$&#39; and outside the scope of the function you can continue to use &#39;$&#39; for other libraries. This avoids any conflict between jQuery and other libraries which share &#39;$&#39;.&lt;/p&gt;
+&lt;h3&gt; 2. Strict Mode&lt;/h3&gt;
+&lt;pre class=&quot;lang:ruby decode:true&quot;&gt;&quot;use strict&quot;;
+&lt;/pre&gt;
+&lt;p&gt;By switching on the strict mode of javascript you opt into a better, secure and restricter version of javascript. In this mode for example you cannot use undeclared variables this way you cannot add variables to global scope by mistake e.g&lt;/p&gt;
+&lt;pre class=&quot;lang:ruby decode:true&quot;&gt;function test() {
+  &quot;use strict&quot;;
+  x = 10; /* throws syntax error - Uncaught ReferenceError: x ... */
+}&lt;/pre&gt;
+&lt;p&gt;Similarly, assigning value to a non-writable or getter-only property will throw error as well. &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode&quot;&gt;MDN&lt;/a&gt; and &lt;a href=&quot;http://www.w3schools.com/js/js_strict.asp&quot;&gt;w3schools&lt;/a&gt; had great explanation on whats allowed and disallowed in strict mode.&lt;/p&gt;
+&lt;h3&gt;3. Constructor Function &amp;amp; Prototype&lt;/h3&gt;
+&lt;pre class=&quot;lang:js decode:true&quot;&gt;var Modal = function (element, options) {
+    this.options        = options
+    this.$body          = $(document.body)
+    ...
+  }
+
+Modal.VERSION  = &#39;3.2.0&#39;
+
+Modal.DEFAULTS = {
+  backdrop: true,
+  keyboard: true,
+  show: true
+}
+
+Modal.prototype.show = function (_relatedTarget) {
+  ....
+}
+&lt;/pre&gt;
+
+&lt;p&gt;Modal is a constructor function which gets called when &#39;new Modal()&#39; is called. Important thing to note is that &#39;this&#39; in Modal function can change references based on how it is called. If its called with the new operator like &#39;new Modal()&quot; then &#39;this&#39; is bound to a newly created object and all the properties like &#39;options&#39; are set on that object. But if its called without new operator like &#39;Modal();&#39; then &#39;this&#39; is bound to the global object and it can clobber the global namespace. Take a look at the example below:&lt;/p&gt;
+&lt;pre class=&quot;lang:ruby decode:true &quot;&gt;var Tester = function() {
+  console.log(this);
+}
+
+Tester();     /* outputs: Window    */
+new Tester(); /* outputs: Tester {} */&lt;/pre&gt;
+&lt;p&gt;After defining the constructor function, we set some properties like &#39;DEFAULT&#39; and &#39;VERSION&#39; and some functions on Modal&#39;s prototype which makes those functions available to all the instances of Modal object. The functions exposed on the prototype becomes the public api of this plugin.&lt;/p&gt;
+&lt;h3&gt;4. Main Plugin Function&lt;/h3&gt;
+&lt;pre class=&quot;lang:js decode:true&quot;&gt;// MODAL PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option, _relatedTarget) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data(&#39;bs.modal&#39;)
+      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == &#39;object&#39; &amp;amp;&amp;amp; option)
+
+      if (!data) $this.data(&#39;bs.modal&#39;, (data = new Modal(this, options)))
+      if (typeof option == &#39;string&#39;) data[option](_relatedTarget)
+      else if (options.show) data.show(_relatedTarget)
+    })
+  }
+
+  var old = $.fn.modal
+
+  $.fn.modal             = Plugin
+  $.fn.modal.Constructor = Modal&lt;/pre&gt;
+&lt;p&gt;This plugin function is the method which gets exposed to jQuery&#39;s prototype ($.fn). This is the method gets called when you call &#39;$(&#39;.my_modal&#39;).modal();&#39;.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 30 Nov 2014 00:00:00 -0500</pubDate>
+        <pubDate>Tue, 13 Jan 2015 23:47:02 -0500</pubDate>
       </item>
     
       <item>
-        <title>Feature images</title>
-        <link>http://www.sortedarray.com/2014/11/29/feature-images.html</link>
-        <guid isPermaLink="true">http://www.sortedarray.com/2014/11/29/feature-images.html</guid>
-        <description>&lt;p&gt;This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the full-width of the page, and is shown with the title on permalink pages.&lt;/p&gt;
+        <title>Open Sans fonts can break accent characters</title>
+        <link>http://www.sortedarray.com/open-sans-fonts-can-break-accent-characters</link>
+        <guid isPermaLink="true">http://www.sortedarray.com/open-sans-fonts-can-break-accent-characters</guid>
+        <description>&lt;p&gt;We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren&#39;t properly rendering in Firefox. Accent characters were slightly right of the main character.&lt;/p&gt;
 
+&lt;p&gt;&lt;img class=&quot;aligncenter wp-image-27 size-large&quot; src=&quot;assets/Screen-Shot-2015-01-04-at-10.39.57-PM-1024x322.png&quot; alt=&quot;Screen Shot 2015-01-04 at 10.39.57 PM&quot; width=&quot;640&quot; height=&quot;201&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.&lt;/p&gt;
+
+&lt;pre class=&quot;lang:ruby decode:true&quot;&gt;&amp;lt;link href=&#39;http://fonts.googleapis.com/css?family=Open+Sans&amp;amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&amp;gt;&lt;/pre&gt;
+
+&lt;p&gt;We realize at this point that our data was not &lt;a href=&quot;http://www.unicode.org/faq/normalization.html&quot;&gt;normalized&lt;/a&gt; and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.&lt;/p&gt;
+
+&lt;pre class=&quot;lang:ruby decode:true&quot;&gt; &lt;span class=&quot;s1&quot;&gt;&quot;ō&quot;.codepoints.to_a &lt;/span&gt; # [111, 772]&lt;/pre&gt;
+
+&lt;p&gt;The reason why we didn&#39;t see this issue in Chrome is because &lt;a href=&quot;http://stackoverflow.com/questions/11176603/how-to-avoid-browsers-unicode-normalization-when-submitting-a-form-with-unicode&quot;&gt;Chrome does the normalization&lt;/a&gt; of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 29 Nov 2014 00:00:00 -0500</pubDate>
+        <pubDate>Sun, 04 Jan 2015 23:23:54 -0500</pubDate>
+      </item>
+    
+      <item>
+        <title>JRuby Performance: Beware of Rails deprecated warnings</title>
+        <link>http://www.sortedarray.com/jruby-performance-beware-of-rails</link>
+        <guid isPermaLink="true">http://www.sortedarray.com/jruby-performance-beware-of-rails</guid>
+        <description>&lt;p&gt;We recently upgraded our JRuby version from 1.3.x to 1.7.12 and suddenly noticed a huge regression in performance. Our requests were starting to slow down by 500 ms and that was huge for our customers.&lt;/p&gt;
+&lt;p&gt;We investigate what could be the potential issue and we used some low level tools like jstack to really nail down where threads were spending most of the time. After investigating, we saw that in our call trace lot of Thread.getStackTrace() calls were made by the app. This is an expensive call in Java.&lt;/p&gt;
+&lt;p&gt;We looked closely of where the calls were coming from and found out that deprecated warnings in Rails methods were causing these calls. Our first thought was that we will just disable the deprecated warnings in Rails by using this flag:&lt;/p&gt;
+&lt;pre class=&quot;lang:ruby decode:true &quot;&gt;ActiveSupport::Deprecation.silenced =true&lt;/pre&gt;
+&lt;p&gt;But we still continue to see getStackTrace calls in our call traces. We further dig down in Rails code and found out that it was the Kernel &#39;caller&#39; method which was the culprit.&lt;/p&gt;
+&lt;pre class=&quot;lang:default decode:true&quot;&gt;ActiveSupport::Deprecation.warn &quot;Calling `assign_shortcuts` is deprecated and has no effect anymore.&quot;, caller&lt;/pre&gt;
+&lt;p&gt;Caller method in JRuby will call the getStackTrace method and this was used by &#39;ActiveSupport::Deprecation.warn&#39; method to report the exact line of the offending method.&lt;/p&gt;
+&lt;p&gt;Since it was passed in as an argument to deprecated warnings method, logic for switching on/off deprecated warnings has no effect. So the &#39;silenced&#39; flag didn&#39;t help at all.&lt;/p&gt;
+&lt;p&gt;So our solution was to fix all the deprecated warnings and wherever we couldn&#39;t fix the warnings, we had to monkey patch Rails and completely remove the deprecated method call from the method.&lt;/p&gt;
+&lt;p&gt;So please beware of Rails deprecated warnings in JRuby!&lt;/p&gt;
+</description>
+        <pubDate>Mon, 11 Aug 2014 02:52:18 -0400</pubDate>
       </item>
     
   </channel>

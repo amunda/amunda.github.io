@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+  <head>
+	<meta charset="utf-8">
+	<title>Open Sans fonts can break accent characters | Sorted Array</title>
+	<meta name="description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Acce...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	
+	<!-- Canonical -->
+	<link rel="canonical" href="http://www.sortedarray.com/open-sans-fonts-can-break-accent-characters">
+	
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Sorted Array" href="http://www.sortedarray.com/feed.xml" />
+	
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+	<!-- Google Analytics -->
+	
+</head>
+
+
+  <body>
+    <header class="site-header">
+
+	<div class="branding">
+		
+		<img class="avatar" src="/img/avatar.png" alt=""/>
+		
+		
+		<h1 class="site-title">
+			<a href="/">Sorted Array</a>
+		</h1>
+	</div>
+	
+	<nav class="site-nav">
+		<ul>
+			
+				
+				<li>
+					<a class="page-link" href="/all_posts/">All Posts</a>
+				</li>
+				
+			
+				
+				<li>
+					<a class="page-link" href="/about/">About</a>
+				</li>
+				
+			
+				
+				<li>
+					<a class="page-link" href="/contact/">Contact Me</a>
+				</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+<li>
+	<a href="http://www.sortedarray.com/feed.xml" title="Follow RSS feed">
+		<i class="fa fa-fw fa-rss"></i>
+	</a>
+</li>
+
+
+
+<li>
+	<a href="mailto:basit.hanif@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/amunda" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/amunda" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+		</ul>
+	</nav>
+	
+</header>
+
+
+    <div class="content">
+      <article >
+
+  <header style="background-image: url('/')">
+    <h1 class="title">Open Sans fonts can break accent characters</h1>
+    
+    <p class="meta">
+    January 4, 2015
+     - {"first_name"=>"Abdul", "last_name"=>"Munda"}
+    </p>
+  </header>
+
+  <section class="post-content">
+    <p>We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.</p>
+
+<p><img class="aligncenter wp-image-27 size-large" src="assets/Screen-Shot-2015-01-04-at-10.39.57-PM-1024x322.png" alt="Screen Shot 2015-01-04 at 10.39.57 PM" width="640" height="201" /></p>
+
+<p>At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.</p>
+
+<pre class="lang:ruby decode:true">&lt;link href='http://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css'/&gt;</pre>
+
+<p>We realize at this point that our data was not <a href="http://www.unicode.org/faq/normalization.html">normalized</a> and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.</p>
+
+<pre class="lang:ruby decode:true"> <span class="s1">"ō".codepoints.to_a </span> # [111, 772]</pre>
+
+<p>The reason why we didn't see this issue in Chrome is because <a href="http://stackoverflow.com/questions/11176603/how-to-avoid-browsers-unicode-normalization-when-submitting-a-form-with-unicode">Chrome does the normalization</a> of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.</p>
+
+  </section>
+
+  <!-- Disqus -->
+  
+  
+</article>
+    </div>
+
+    
+  </body>
+  
+</html>

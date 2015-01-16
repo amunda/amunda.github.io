@@ -3,8 +3,8 @@
 
   <head>
 	<meta charset="utf-8">
-	<title> Sorted Array</title>
-	<meta name="description" content="A website with blog posts, and pages.">
+	<title>JRuby Performance: Beware of Rails deprecated warnings | Sorted Array</title>
+	<meta name="description" content="We recently upgraded our JRuby version from 1.3.x to 1.7.12 and suddenly noticed a huge regression in performance. Our requests were starting to slow down by...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<!-- CSS -->
@@ -14,7 +14,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	
 	<!-- Canonical -->
-	<link rel="canonical" href="http://www.sortedarray.com/">
+	<link rel="canonical" href="http://www.sortedarray.com/jruby-performance-beware-of-rails">
 	
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Sorted Array" href="http://www.sortedarray.com/feed.xml" />
@@ -144,67 +144,19 @@
 
 
     <div class="content">
-      <div class="home">
+      <article >
 
-  
-
-  <div class="posts">
+  <header style="background-image: url('/')">
+    <h1 class="title">JRuby Performance: Beware of Rails deprecated warnings</h1>
     
-    <div class="post-teaser">
-    
-      <header>
-        <h1>
-          <a class="post-link" href="/breakdown-of-bootstrap-plugin">Breakdown of Bootstrap Plugin</a>
-        </h1>
-        
-        <p class="meta">January 13, 2015</p>
-      </header>
+    <p class="meta">
+    August 11, 2014
+     - {"login"=>"amunda", "email"=>"basit.hanif@gmail.com", "display_name"=>"amunda", "first_name"=>"", "last_name"=>""}
+    </p>
+  </header>
 
-      <div class="excerpt">
-        <p>Most of the Bootstrap javascript plugins like Modal, Dropdown and others share the same basic template. I wanted to extract that template out from their js plugin and explain each part. Here is the basic template extracted from <a title="modal.js" href="https://github.com/twbs/bootstrap/blob/master/js/modal.js">modal.js</a>.</p>
-<pre><code class="language-javascript">
-  
-  'use strict';
-
-
-
-        <a class="button" href="/breakdown-of-bootstrap-plugin">Continue reading</a>
-      </div>
-      
-    </div>
-    
-    <div class="post-teaser">
-    
-      <header>
-        <h1>
-          <a class="post-link" href="/open-sans-fonts-can-break-accent-characters">Open Sans fonts can break accent characters</a>
-        </h1>
-        
-        <p class="meta">January 4, 2015</p>
-      </header>
-
-      <div class="excerpt">
-        <p>We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.</p>
-
-
-
-        <a class="button" href="/open-sans-fonts-can-break-accent-characters">Continue reading</a>
-      </div>
-      
-    </div>
-    
-    <div class="post-teaser">
-    
-      <header>
-        <h1>
-          <a class="post-link" href="/jruby-performance-beware-of-rails">JRuby Performance: Beware of Rails deprecated warnings</a>
-        </h1>
-        
-        <p class="meta">August 11, 2014</p>
-      </header>
-
-      <div class="excerpt">
-        <p>We recently upgraded our JRuby version from 1.3.x to 1.7.12 and suddenly noticed a huge regression in performance. Our requests were starting to slow down by 500 ms and that was huge for our customers.</p>
+  <section class="post-content">
+    <p>We recently upgraded our JRuby version from 1.3.x to 1.7.12 and suddenly noticed a huge regression in performance. Our requests were starting to slow down by 500 ms and that was huge for our customers.</p>
 <p>We investigate what could be the potential issue and we used some low level tools like jstack to really nail down where threads were spending most of the time. After investigating, we saw that in our call trace lot of Thread.getStackTrace() calls were made by the app. This is an expensive call in Java.</p>
 <p>We looked closely of where the calls were coming from and found out that deprecated warnings in Rails methods were causing these calls. Our first thought was that we will just disable the deprecated warnings in Rails by using this flag:</p>
 <pre class="lang:ruby decode:true ">ActiveSupport::Deprecation.silenced =true</pre>
@@ -215,19 +167,12 @@
 <p>So our solution was to fix all the deprecated warnings and wherever we couldn't fix the warnings, we had to monkey patch Rails and completely remove the deprecated method call from the method.</p>
 <p>So please beware of Rails deprecated warnings in JRuby!</p>
 
+  </section>
 
-
-
-        <a class="button" href="/jruby-performance-beware-of-rails">Continue reading</a>
-      </div>
-      
-    </div>
-    
-  </div>
-
+  <!-- Disqus -->
   
-</div>
-
+  
+</article>
     </div>
 
     
