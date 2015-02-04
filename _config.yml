@@ -1,62 +1,58 @@
-# SITE CONFIGURATION
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://www.sortedarray.com" # the base hostname & protocol for your site
-permalink: "/:title"
+# Site wide configuration
 
-# THEME-SPECIFIC CONFIGURATION
-theme:
-  # Meta
-  title: "['Sorted', 'Array'].sort"
-  avatar: avatar.png
-  description: "A website with blog posts, and pages." # used by search engines
-  
-  # Header and footer text
-  # header_text:
-  footer_text:   
-  # Icons
-  rss: true
-  email_address: "basit.hanif@gmail.com"
-  behance:
-  bitbucket: 
-  dribbble: 
-  facebook: 
-  flickr: 
-  github: "amunda"
-  google_plus: 
-  instagram: 
-  linkedin:  # full URL
-  pinterest: 
-  reddit: 
-  soundcloud: 
-  stack_exchange:  # full URL
-  steam: 
-  tumblr: 
-  twitter: "amunda"
-  wordpress: 
-  youtube: 
-  
-  # Scripts
-  google_analytics: # tracking id, e.g. "UA-000000-01"
-  disqus_shortname:
-  
-  # Localization strings
-  str_follow_on: "Follow on"
-  str_rss_follow: "Follow RSS feed"
-  str_email: "Email"
-  str_next: "Next"
-  str_prev: "Prev"
-  str_continue_reading: "Continue reading"
-  
-  # Colors, typography and padding
-  # Open the "_sass > base" folder, and open "_variables.scss"
+title: "['Sorted', 'Array'].sort"
+locale:           en_US
+url:             
 
-# PAGINATION
-paginate: 5
-paginate_path: "blog/page:num"
+# Jekyll configuration
 
-# BUILD SETTINGS
-markdown: kramdown
+permalink:   /:categories/:title/
+markdown:    kramdown
 highlighter: pygments
 sass:
   sass_dir: _sass
-  style: :compressed
+  style: compressed
+gems:
+  - jekyll-sitemap
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: false
+
+
+# Site owner
+owner:
+  name: Abdul Munda
+  avatar: bio-photo.png
+  bio: "I am Abdul Munda from Toronto, Canada. I am a father, husband, full-stack Rails developer and entrepreneur. Love to build and learn new things."
+  email: 
+  disqus-shortname: 
+  twitter: amunda
+  facebook: #username
+  google:
+    plus: #username
+    analytics: 
+    verify: 
+    ad-client: 
+    ad-slot: 
+  bing-verify: 
+  github: amunda
+  stackoverflow: #http://stackoverflow.com/users/123456/username
+  linkedin: amunda
+  instagram: #username
+  lastfm: #username
+  tumblr: #username
+  pinterest: #username
+  foursquare: #username
+  steam: #username
+  dribbble: #username
+  youtube: #username
+  soundcloud: #username
+  weibo: #username
+  flickr: #username
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]

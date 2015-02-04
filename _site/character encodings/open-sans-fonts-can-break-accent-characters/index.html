@@ -1,0 +1,245 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Open Sans fonts can break accent characters &#8211; ['Sorted', 'Array'].sort</title>
+<meta name="description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
+
+At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.
+&lt;link href='http://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css'/&gt;
+We realize at this point that our data was not normalized and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.
+ "ō".codepoints.to_a  # [111, 772]
+The reason why we didn't see this issue in Chrome is because Chrome does the normalization of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.
+
+
+">
+<meta name="keywords" content="Fonts, Uniocde">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Open Sans fonts can break accent characters">
+<meta name="twitter:description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
+
+At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.
+&lt;link href='http://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css'/&gt;
+We realize at this point that our data was not normalized and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.
+ "ō".codepoints.to_a  # [111, 772]
+The reason why we didn't see this issue in Chrome is because Chrome does the normalization of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.
+
+
+">
+<meta name="twitter:site" content="@amunda">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open Sans fonts can break accent characters">
+<meta property="og:description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
+
+At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.
+&lt;link href='http://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css'/&gt;
+We realize at this point that our data was not normalized and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.
+ "ō".codepoints.to_a  # [111, 772]
+The reason why we didn't see this issue in Chrome is because Chrome does the normalization of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.
+
+
+">
+<meta property="og:url" content="/character%20encodings/open-sans-fonts-can-break-accent-characters/">
+<meta property="og:site_name" content="['Sorted', 'Array'].sort">
+
+
+
+
+
+<link rel="canonical" href="/character%20encodings/open-sans-fonts-can-break-accent-characters/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="['Sorted', 'Array'].sort Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">['Sorted','Array']<span>.sort()</span></a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Sample Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/theme-setup/" >Theme Setup</a></li>
+				
+				    
+				        
+				        
+				    <li><a href="http://mademistakes.com" target="_blank">Made Mistakes</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+<div class="site-boundary">
+</div>
+
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/character%20encodings/open-sans-fonts-can-break-accent-characters/" rel="bookmark" title="Open Sans fonts can break accent characters">Open Sans fonts can break accent characters</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.</p>
+<p><img class="aligncenter wp-image-27 size-large" src="assets/Screen-Shot-2015-01-04-at-10.39.57-PM-1024x322.png" alt="Screen Shot 2015-01-04 at 10.39.57 PM" width="640" height="201" /></p>
+<p>At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.</p>
+<pre class="lang:ruby decode:true">&lt;link href='http://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css'/&gt;</pre>
+<p>We realize at this point that our data was not <a href="http://www.unicode.org/faq/normalization.html">normalized</a> and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.</p>
+<pre class="lang:ruby decode:true"> <span class="s1">"ō".codepoints.to_a </span> # [111, 772]</pre>
+<p>The reason why we didn't see this issue in Chrome is because <a href="http://stackoverflow.com/questions/11176603/how-to-avoid-browsers-unicode-normalization-when-submitting-a-form-with-unicode">Chrome does the normalization</a> of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/character%20encodings/open-sans-fonts-can-break-accent-characters/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/character%20encodings/open-sans-fonts-can-break-accent-characters/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/character%20encodings/open-sans-fonts-can-break-accent-characters/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Open Sans fonts can break accent characters</strong> was published on <time datetime="2015-01-04T23:23:54-05:00">January 04, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/" title="Handling S3 IncompleteBody error when using asset_sync gem">Handling S3 IncompleteBody error when using asset_sync gem</a></li>
+    
+      <li><a href="/javascript/breakdown-of-bootstrap-plugin/" title="Breakdown of Bootstrap Plugin">Breakdown of Bootstrap Plugin</a></li>
+    
+      <li><a href="/ruby/jruby-performance-beware-of-rails/" title="JRuby Performance: Beware of Rails deprecated warnings">JRuby Performance: Beware of Rails deprecated warnings</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+<span>&copy; 2015 Abdul Munda. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+	        
+
+</body>
+</html>

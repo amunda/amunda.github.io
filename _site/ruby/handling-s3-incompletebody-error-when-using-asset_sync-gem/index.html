@@ -1,0 +1,293 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Handling S3 IncompleteBody error when using asset_sync gem &#8211; ['Sorted', 'Array'].sort</title>
+<meta name="description" content="I was recently trying to move the assets to S3 for a Rails project. I decided to use the asset_sync gem which uploads assets to S3 on the pre-compilation of the assets. Everything worked smoothly for a few files but failed shortly for large asset files. It failed with 400 Bad Request with the message saying "IncompleteBody".
+rake aborted!
+Excon::Errors::BadRequest: Expected(200) &lt;=&gt; Actual(400 Bad Request)
+excon.error.response
+  :body          =&gt; "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;Error&gt;&lt;Code&gt;IncompleteBody&lt;/Code&gt;&lt;Message&gt;The request body terminated unexpectedly&lt;/Message&gt;&lt;RequestId&gt;5308A1EB2B27126C&lt;/RequestId&gt;&lt;HostId&gt;fWLX6lpgCA0naOISn774juwtKAs9NHODP5WQHFBX7tVPVrK52OI7wlE8YY5zG/ohtis5cvit8f8=&lt;/HostId&gt;&lt;/Error&gt;"
+...
+
+.../gems/excon-0.43.0/lib/excon/middlewares/expects.rb:6:in `response_call'
+.../gems/excon-0.43.0/lib/excon/middlewares/response_parser.rb:8:in `response_call'
+.../gems/excon-0.43.0/lib/excon/connection.rb:366:in `response'
+.../gems/excon-0.43.0/lib/excon/connection.rb:236:in `request'
+I took a look at the amazon S3 Error Responses page and it said that it happens when "You did not provide the number of bytes specified by the Content-Length HTTP header".
+Generally, when a request is not sent with a 'Content-Length' header, it is usually because the request is sent as a chunked request. In a chunked request, the 'Content-Length' header is replaced with the 'Transfer-Encoding: chunked' header.
+It appeared from the error that S3 wasn't able to handle the chunked request sent by Excon which is used by asset_sync gem internally. I did some digging and found out that Excon luckily provides a way to disable sending chunked requests. This can easily be done by setting 'nonblock' property to false. I added the following to my initializers:
+if  ENV["RAILS_GROUPS"] == 'assets'
+  Excon.defaults[:nonblock] = false
+end
+And ta-da assets started uploading properly.
+I hope this helps someone who is struggling to upload large assets using asset_sync gem and getting a 400 Bad Request error with an "IncompleteBody" message.
+
+
+">
+<meta name="keywords" content="assets">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Handling S3 IncompleteBody error when using asset_sync gem">
+<meta name="twitter:description" content="I was recently trying to move the assets to S3 for a Rails project. I decided to use the asset_sync gem which uploads assets to S3 on the pre-compilation of the assets. Everything worked smoothly for a few files but failed shortly for large asset files. It failed with 400 Bad Request with the message saying "IncompleteBody".
+rake aborted!
+Excon::Errors::BadRequest: Expected(200) &lt;=&gt; Actual(400 Bad Request)
+excon.error.response
+  :body          =&gt; "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;Error&gt;&lt;Code&gt;IncompleteBody&lt;/Code&gt;&lt;Message&gt;The request body terminated unexpectedly&lt;/Message&gt;&lt;RequestId&gt;5308A1EB2B27126C&lt;/RequestId&gt;&lt;HostId&gt;fWLX6lpgCA0naOISn774juwtKAs9NHODP5WQHFBX7tVPVrK52OI7wlE8YY5zG/ohtis5cvit8f8=&lt;/HostId&gt;&lt;/Error&gt;"
+...
+
+.../gems/excon-0.43.0/lib/excon/middlewares/expects.rb:6:in `response_call'
+.../gems/excon-0.43.0/lib/excon/middlewares/response_parser.rb:8:in `response_call'
+.../gems/excon-0.43.0/lib/excon/connection.rb:366:in `response'
+.../gems/excon-0.43.0/lib/excon/connection.rb:236:in `request'
+I took a look at the amazon S3 Error Responses page and it said that it happens when "You did not provide the number of bytes specified by the Content-Length HTTP header".
+Generally, when a request is not sent with a 'Content-Length' header, it is usually because the request is sent as a chunked request. In a chunked request, the 'Content-Length' header is replaced with the 'Transfer-Encoding: chunked' header.
+It appeared from the error that S3 wasn't able to handle the chunked request sent by Excon which is used by asset_sync gem internally. I did some digging and found out that Excon luckily provides a way to disable sending chunked requests. This can easily be done by setting 'nonblock' property to false. I added the following to my initializers:
+if  ENV["RAILS_GROUPS"] == 'assets'
+  Excon.defaults[:nonblock] = false
+end
+And ta-da assets started uploading properly.
+I hope this helps someone who is struggling to upload large assets using asset_sync gem and getting a 400 Bad Request error with an "IncompleteBody" message.
+
+
+">
+<meta name="twitter:site" content="@amunda">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handling S3 IncompleteBody error when using asset_sync gem">
+<meta property="og:description" content="I was recently trying to move the assets to S3 for a Rails project. I decided to use the asset_sync gem which uploads assets to S3 on the pre-compilation of the assets. Everything worked smoothly for a few files but failed shortly for large asset files. It failed with 400 Bad Request with the message saying "IncompleteBody".
+rake aborted!
+Excon::Errors::BadRequest: Expected(200) &lt;=&gt; Actual(400 Bad Request)
+excon.error.response
+  :body          =&gt; "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;Error&gt;&lt;Code&gt;IncompleteBody&lt;/Code&gt;&lt;Message&gt;The request body terminated unexpectedly&lt;/Message&gt;&lt;RequestId&gt;5308A1EB2B27126C&lt;/RequestId&gt;&lt;HostId&gt;fWLX6lpgCA0naOISn774juwtKAs9NHODP5WQHFBX7tVPVrK52OI7wlE8YY5zG/ohtis5cvit8f8=&lt;/HostId&gt;&lt;/Error&gt;"
+...
+
+.../gems/excon-0.43.0/lib/excon/middlewares/expects.rb:6:in `response_call'
+.../gems/excon-0.43.0/lib/excon/middlewares/response_parser.rb:8:in `response_call'
+.../gems/excon-0.43.0/lib/excon/connection.rb:366:in `response'
+.../gems/excon-0.43.0/lib/excon/connection.rb:236:in `request'
+I took a look at the amazon S3 Error Responses page and it said that it happens when "You did not provide the number of bytes specified by the Content-Length HTTP header".
+Generally, when a request is not sent with a 'Content-Length' header, it is usually because the request is sent as a chunked request. In a chunked request, the 'Content-Length' header is replaced with the 'Transfer-Encoding: chunked' header.
+It appeared from the error that S3 wasn't able to handle the chunked request sent by Excon which is used by asset_sync gem internally. I did some digging and found out that Excon luckily provides a way to disable sending chunked requests. This can easily be done by setting 'nonblock' property to false. I added the following to my initializers:
+if  ENV["RAILS_GROUPS"] == 'assets'
+  Excon.defaults[:nonblock] = false
+end
+And ta-da assets started uploading properly.
+I hope this helps someone who is struggling to upload large assets using asset_sync gem and getting a 400 Bad Request error with an "IncompleteBody" message.
+
+
+">
+<meta property="og:url" content="/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/">
+<meta property="og:site_name" content="['Sorted', 'Array'].sort">
+
+
+
+
+
+<link rel="canonical" href="/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="['Sorted', 'Array'].sort Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">['Sorted','Array']<span>.sort()</span></a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Sample Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/theme-setup/" >Theme Setup</a></li>
+				
+				    
+				        
+				        
+				    <li><a href="http://mademistakes.com" target="_blank">Made Mistakes</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+<div class="site-boundary">
+</div>
+
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/" rel="bookmark" title="Handling S3 IncompleteBody error when using asset_sync gem">Handling S3 IncompleteBody error when using asset_sync gem</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>I was recently trying to move the assets to S3 for a Rails project. I decided to use the asset_sync gem which uploads assets to S3 on the pre-compilation of the assets. Everything worked smoothly for a few files but failed shortly for large asset files. It failed with 400 Bad Request with the message saying "IncompleteBody".</p>
+<pre class="lang:sh decode:true">rake aborted!
+Excon::Errors::BadRequest: Expected(200) &lt;=&gt; Actual(400 Bad Request)
+excon.error.response
+  :body          =&gt; "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;Error&gt;&lt;Code&gt;IncompleteBody&lt;/Code&gt;&lt;Message&gt;The request body terminated unexpectedly&lt;/Message&gt;&lt;RequestId&gt;5308A1EB2B27126C&lt;/RequestId&gt;&lt;HostId&gt;fWLX6lpgCA0naOISn774juwtKAs9NHODP5WQHFBX7tVPVrK52OI7wlE8YY5zG/ohtis5cvit8f8=&lt;/HostId&gt;&lt;/Error&gt;"
+...
+
+.../gems/excon-0.43.0/lib/excon/middlewares/expects.rb:6:in `response_call'
+.../gems/excon-0.43.0/lib/excon/middlewares/response_parser.rb:8:in `response_call'
+.../gems/excon-0.43.0/lib/excon/connection.rb:366:in `response'
+.../gems/excon-0.43.0/lib/excon/connection.rb:236:in `request'</pre>
+<p>I took a look at the amazon S3 <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html">Error Responses</a> page and it said that it happens when "You did not provide the number of bytes specified by the Content-Length HTTP header".</p>
+<p>Generally, when a request is not sent with a 'Content-Length' header, it is usually because the request is sent as a chunked request. In a chunked request, the 'Content-Length' header is replaced with the '<span class="js-issue-title">T</span>ransfer-Encoding: chunked' header.</p>
+<p>It appeared from the error that S3 wasn't able to handle the chunked request sent by Excon which is used by asset_sync gem internally. I did some digging and found out that Excon luckily provides a way to disable sending chunked requests. This can easily be done by setting 'nonblock' property to false. I added the following to my initializers:</p>
+<pre class="lang:ruby decode:true  ">if  ENV["RAILS_GROUPS"] == 'assets'
+  Excon.defaults[:nonblock] = false
+end</pre>
+<p>And ta-da assets started uploading properly.</p>
+<p>I hope this helps someone who is struggling to upload large assets using asset_sync gem and getting a 400 Bad Request error with an "IncompleteBody" message.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Handling S3 IncompleteBody error when using asset_sync gem</strong> was published on <time datetime="2015-01-26T07:00:08-05:00">January 26, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/javascript/breakdown-of-bootstrap-plugin/" title="Breakdown of Bootstrap Plugin">Breakdown of Bootstrap Plugin</a></li>
+    
+      <li><a href="/character%20encodings/open-sans-fonts-can-break-accent-characters/" title="Open Sans fonts can break accent characters">Open Sans fonts can break accent characters</a></li>
+    
+      <li><a href="/ruby/jruby-performance-beware-of-rails/" title="JRuby Performance: Beware of Rails deprecated warnings">JRuby Performance: Beware of Rails deprecated warnings</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+<span>&copy; 2015 Abdul Munda. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+	        
+
+</body>
+</html>
