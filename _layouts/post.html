@@ -30,7 +30,7 @@
 
 <div id="main" role="main">
   <div class="article-author-side">
-    {% include _author-bio.html %}
+    {% include _author-bio.html %}    
   </div>
   <article class="post">
     <div class="headline-wrap">
@@ -39,16 +39,18 @@
       {% else %}
         <h1><a href="{{ site.url }}{{ page.url }}" rel="bookmark" title="{{ page.title }}">{{ page.title }}</a></h1>
       {% endif %}
+      <p class="byline"> Published on <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.modified %} and last modified on <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time>{% endif %} by {{site.owner.name}}.</p>
+      
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
       {{ content }}
       <hr />
       <footer role="contentinfo">
         {% if page.share != false %}{% include _social-share.html %}{% endif %}
-        <p class="byline"><strong>{{ page.title }}</strong> was published on <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.modified %} and last modified on <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time>{% endif %}.</p>
+        <!-- <p class="byline"><strong>{{ page.title }}</strong> was published on <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.modified %} and last modified on <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time>{% endif %}.</p> -->
       </footer>
     </div><!-- /.article-wrap -->
-  {% if site.owner.disqus-shortname and page.comments == true %}
+  {% if site.owner.disqus-shortname %}
     <section id="disqus_thread"></section><!-- /#disqus_thread -->
   {% endif %}
   </article>

@@ -89,27 +89,25 @@
 	<div class="top-navigation">
 		<nav role="navigation" id="site-nav" class="nav">
 		    <ul>
-		        
+		     
 				    
 				        
 				    
-				    <li><a href="/about/" >About</a></li>
+				    <li><a href="/posts/" >All Posts</a></li>
 				
 				    
 				        
 				    
-				    <li><a href="/posts/" >Sample Posts</a></li>
+				    <li><a href="/presentations/" >Presentations</a></li>
 				
 				    
 				        
 				    
-				    <li><a href="/theme-setup/" >Theme Setup</a></li>
+				    <li><a href="/contact/" >Contact</a></li>
 				
-				    
-				        
-				        
-				    <li><a href="http://mademistakes.com" target="_blank">Made Mistakes</a></li>
-				
+        
+          <li><a href="feed.xml" class="author-social" target="_blank"><i class="fa fa-fw fa-rss"></i></a></li>
+        
 		    </ul>
 		</nav>
 	</div><!-- /.top-navigation -->
@@ -123,17 +121,25 @@
 
 <div id="main" role="main">
   <div class="article-author-side">
-    
-  
+      
+
 
 <div itemscope itemtype="http://schema.org/Person">
 
 
-	<img src="/images/" class="bio-photo" alt=" bio photo">
+	<img src="/images/bio-photo.png" class="bio-photo" alt="Abdul Munda bio photo">
 
 
-  <h3 itemprop="name"></h3>
-  <p></p>
+  <h3 itemprop="name">Abdul Munda</h3>
+  <p>I am Abdul Munda from Toronto, Canada. I am a father, husband, full-stack Rails developer and entrepreneur. Love to build and learn new things.</p>
+  
+  <a href="http://twitter.com/amunda" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  
+  <a href="http://linkedin.com/in/amunda" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  <a href="http://github.com/amunda" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
   
   
   
@@ -144,20 +150,14 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-</div>
+</div>    
   </div>
   <article class="post">
     <div class="headline-wrap">
       
         <h1><a href="/ruby/jruby-performance-beware-of-rails/" rel="bookmark" title="JRuby Performance: Beware of Rails deprecated warnings">JRuby Performance: Beware of Rails deprecated warnings</a></h1>
+      
+      <p class="byline"> Published on <time datetime="2014-08-11T02:52:18-04:00">August 11, 2014</time> by Abdul Munda.</p>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
@@ -197,9 +197,11 @@
     </li>
   </ul>
 </div><!-- /.social-share -->
-        <p class="byline"><strong>JRuby Performance: Beware of Rails deprecated warnings</strong> was published on <time datetime="2014-08-11T02:52:18-04:00">August 11, 2014</time>.</p>
+        <!-- <p class="byline"><strong>JRuby Performance: Beware of Rails deprecated warnings</strong> was published on <time datetime="2014-08-11T02:52:18-04:00">August 11, 2014</time>.</p> -->
       </footer>
     </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
   
   </article>
 </div><!-- /#main -->
@@ -221,7 +223,6 @@
   <footer>
     
 
-<span>&copy; 2015 Abdul Munda. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
 
   </footer>
 </div><!-- /.footer-wrap -->
@@ -229,6 +230,30 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/assets/js/scripts.min.js"></script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'sortedarray'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 	        
 

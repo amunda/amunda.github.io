@@ -10,6 +10,7 @@ tags:
 status: publish
 type: post
 published: true
+comments: true
 meta:
   _s2mail: 'yes'
   _edit_last: '1'
@@ -22,9 +23,18 @@ author:
   last_name: ''
 ---
 <p>We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.</p>
-<p><img class="aligncenter wp-image-27 size-large" src="assets/Screen-Shot-2015-01-04-at-10.39.57-PM-1024x322.png" alt="Screen Shot 2015-01-04 at 10.39.57 PM" width="640" height="201" /></p>
-<p>At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.</p>
-<pre class="lang:ruby decode:true">&lt;link href='http://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css'/&gt;</pre>
+
+<p><img class="aligncenter wp-image-27 size-large" src="/assets/Screen-Shot-2015-01-04-at-10.39.57-PM-1024x322.png" alt="Screen Shot 2015-01-04 at 10.39.57 PM" width="640" height="201" /></p>
+
+<p>
+At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.</p>
+{% highlight ruby %}
+<link href='http://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css'/>;
+{% endhighlight %}
+
 <p>We realize at this point that our data was not <a href="http://www.unicode.org/faq/normalization.html">normalized</a> and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.</p>
-<pre class="lang:ruby decode:true"> <span class="s1">"ō".codepoints.to_a </span> # [111, 772]</pre>
+{% highlight ruby %}
+<span class="s1">"ō".codepoints.to_a </span> # [111, 772]</pre>
+{% endhighlight %}
+
 <p>The reason why we didn't see this issue in Chrome is because <a href="http://stackoverflow.com/questions/11176603/how-to-avoid-browsers-unicode-normalization-when-submitting-a-form-with-unicode">Chrome does the normalization</a> of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.</p>

@@ -9,6 +9,7 @@ tags:
 status: publish
 type: post
 published: true
+comments: true
 meta:
   _s2mail: 'yes'
   _edit_last: '1'
@@ -20,21 +21,27 @@ author:
   last_name: ''
 ---
 <p>I was recently trying to move the assets to S3 for a Rails project. I decided to use the asset_sync gem which uploads assets to S3 on the pre-compilation of the assets. Everything worked smoothly for a few files but failed shortly for large asset files. It failed with 400 Bad Request with the message saying "IncompleteBody".</p>
-<pre class="lang:sh decode:true">rake aborted!
-Excon::Errors::BadRequest: Expected(200) &lt;=&gt; Actual(400 Bad Request)
+
+{% highlight ruby %}
+rake aborted!
+Excon::Errors::BadRequest: Expected(200) <=< Actual(400 Bad Request)
 excon.error.response
-  :body          =&gt; "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;Error&gt;&lt;Code&gt;IncompleteBody&lt;/Code&gt;&lt;Message&gt;The request body terminated unexpectedly&lt;/Message&gt;&lt;RequestId&gt;5308A1EB2B27126C&lt;/RequestId&gt;&lt;HostId&gt;fWLX6lpgCA0naOISn774juwtKAs9NHODP5WQHFBX7tVPVrK52OI7wlE8YY5zG/ohtis5cvit8f8=&lt;/HostId&gt;&lt;/Error&gt;"
+  :body          => "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>IncompleteBody</Code><Message>The request body terminated unexpectedly</Message><RequestId>5308A1EB2B27126C</RequestId><HostId>fWLX6lpgCA0naOISn774juwtKAs9NHODP5WQHFBX7tVPVrK52OI7wlE8YY5zG/ohtis5cvit8f8=</HostId></Error>"
 ...
 
 .../gems/excon-0.43.0/lib/excon/middlewares/expects.rb:6:in `response_call'
 .../gems/excon-0.43.0/lib/excon/middlewares/response_parser.rb:8:in `response_call'
 .../gems/excon-0.43.0/lib/excon/connection.rb:366:in `response'
-.../gems/excon-0.43.0/lib/excon/connection.rb:236:in `request'</pre>
+.../gems/excon-0.43.0/lib/excon/connection.rb:236:in `request'
+{% endhighlight %}
+
 <p>I took a look at the amazon S3 <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html">Error Responses</a> page and it said that it happens when "You did not provide the number of bytes specified by the Content-Length HTTP header".</p>
 <p>Generally, when a request is not sent with a 'Content-Length' header, it is usually because the request is sent as a chunked request. In a chunked request, the 'Content-Length' header is replaced with the '<span class="js-issue-title">T</span>ransfer-Encoding: chunked' header.</p>
 <p>It appeared from the error that S3 wasn't able to handle the chunked request sent by Excon which is used by asset_sync gem internally. I did some digging and found out that Excon luckily provides a way to disable sending chunked requests. This can easily be done by setting 'nonblock' property to false. I added the following to my initializers:</p>
-<pre class="lang:ruby decode:true  ">if  ENV["RAILS_GROUPS"] == 'assets'
+{% highlight ruby %}
+  if  ENV["RAILS_GROUPS"] == 'assets'
   Excon.defaults[:nonblock] = false
-end</pre>
+end
+{% endhighlight %}
 <p>And ta-da assets started uploading properly.</p>
 <p>I hope this helps someone who is struggling to upload large assets using asset_sync gem and getting a 400 Bad Request error with an "IncompleteBody" message.</p>
