@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-02-04T09:34:51-05:00</updated>
+<updated>2015-02-07T22:15:32-05:00</updated>
 <id>/</id>
 <author>
   <name>Abdul Munda</name>
@@ -16,9 +16,35 @@
   
 
 <entry>
+  <title type="html"><![CDATA[ReactJS in Rails]]></title>
+  <link rel="alternate" type="text/html" href="/2015-02-07-using-reactjs-in-rails/" />
+  <id>/2015-02-07-using-reactjs-in-rails</id>
+  <published>2015-02-07T00:00:00-05:00</published>
+  <updated>2015-02-07T00:00:00-05:00</updated>
+  <author>
+    <name></name>
+    <uri></uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;Recently, I started playing around with ReactJS for one of my Rails project and was extremly 
+impressed by this library. The simplicity of the library and dividing views into components made 
+lot of sense for me &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is ReactJS&lt;/strong&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;/2015-02-07-using-reactjs-in-rails/&quot;&gt;ReactJS in Rails&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on February 07, 2015.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
   <title type="html"><![CDATA[Handling S3 IncompleteBody error when using asset_sync gem]]></title>
-  <link rel="alternate" type="text/html" href="/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/" />
-  <id>/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem</id>
+  <link rel="alternate" type="text/html" href="/handling-s3-incompletebody-error-when-using-asset_sync-gem/" />
+  <id>/handling-s3-incompletebody-error-when-using-asset_sync-gem</id>
   <published>2015-01-26T07:00:08-05:00</published>
   <updated>2015-01-26T07:00:08-05:00</updated>
   <author>
@@ -49,7 +75,7 @@
 &lt;p&gt;And ta-da assets started uploading properly.&lt;/p&gt;
 &lt;p&gt;I hope this helps someone who is struggling to upload large assets using asset_sync gem and getting a 400 Bad Request error with an &quot;IncompleteBody&quot; message.&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/&quot;&gt;Handling S3 IncompleteBody error when using asset_sync gem&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on January 26, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/handling-s3-incompletebody-error-when-using-asset_sync-gem/&quot;&gt;Handling S3 IncompleteBody error when using asset_sync gem&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on January 26, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -58,8 +84,8 @@
 
 <entry>
   <title type="html"><![CDATA[Breakdown of Bootstrap Plugin]]></title>
-  <link rel="alternate" type="text/html" href="/javascript/breakdown-of-bootstrap-plugin/" />
-  <id>/javascript/breakdown-of-bootstrap-plugin</id>
+  <link rel="alternate" type="text/html" href="/breakdown-of-bootstrap-plugin/" />
+  <id>/breakdown-of-bootstrap-plugin</id>
   <published>2015-01-18T16:41:04-05:00</published>
   <updated>2015-01-18T16:41:04-05:00</updated>
   <author>
@@ -203,7 +229,7 @@
 &lt;h3&gt;Conclusion:&lt;/h3&gt;
 &lt;p&gt;There are some of the lessons I learned from this plugin pattern and it gives a great boiler plate for writing jQuery plugins. If you have learned some other things from this pattern, please share in the comments.&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/javascript/breakdown-of-bootstrap-plugin/&quot;&gt;Breakdown of Bootstrap Plugin&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on January 18, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/breakdown-of-bootstrap-plugin/&quot;&gt;Breakdown of Bootstrap Plugin&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on January 18, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -212,8 +238,8 @@
 
 <entry>
   <title type="html"><![CDATA[Open Sans fonts can break accent characters]]></title>
-  <link rel="alternate" type="text/html" href="/character%20encodings/open-sans-fonts-can-break-accent-characters/" />
-  <id>/character%20encodings/open-sans-fonts-can-break-accent-characters</id>
+  <link rel="alternate" type="text/html" href="/open-sans-fonts-can-break-accent-characters/" />
+  <id>/open-sans-fonts-can-break-accent-characters</id>
   <published>2015-01-04T23:23:54-05:00</published>
   <updated>2015-01-04T23:23:54-05:00</updated>
   <author>
@@ -235,7 +261,7 @@ At first, we thought that this could be because we were missing a charset, so we
 
 &lt;p&gt;The reason why we didn&#39;t see this issue in Chrome is because &lt;a href=&quot;http://stackoverflow.com/questions/11176603/how-to-avoid-browsers-unicode-normalization-when-submitting-a-form-with-unicode&quot;&gt;Chrome does the normalization&lt;/a&gt; of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/character%20encodings/open-sans-fonts-can-break-accent-characters/&quot;&gt;Open Sans fonts can break accent characters&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on January 04, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/open-sans-fonts-can-break-accent-characters/&quot;&gt;Open Sans fonts can break accent characters&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on January 04, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -244,8 +270,8 @@ At first, we thought that this could be because we were missing a charset, so we
 
 <entry>
   <title type="html"><![CDATA[JRuby Performance: Beware of Rails deprecated warnings]]></title>
-  <link rel="alternate" type="text/html" href="/ruby/jruby-performance-beware-of-rails/" />
-  <id>/ruby/jruby-performance-beware-of-rails</id>
+  <link rel="alternate" type="text/html" href="/jruby-performance-beware-of-rails/" />
+  <id>/jruby-performance-beware-of-rails</id>
   <published>2014-08-11T02:52:18-04:00</published>
   <updated>2014-08-11T02:52:18-04:00</updated>
   <author>
@@ -274,7 +300,7 @@ At first, we thought that this could be because we were missing a charset, so we
 
 &lt;p&gt;So please beware of Rails deprecated warnings in JRuby!&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/ruby/jruby-performance-beware-of-rails/&quot;&gt;JRuby Performance: Beware of Rails deprecated warnings&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on August 11, 2014.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/jruby-performance-beware-of-rails/&quot;&gt;JRuby Performance: Beware of Rails deprecated warnings&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on August 11, 2014.&lt;/p&gt;
   </content>
 </entry>
 

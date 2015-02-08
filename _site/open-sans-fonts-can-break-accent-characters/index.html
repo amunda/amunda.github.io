@@ -5,34 +5,40 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>About the Theme &#8211; ['Sorted', 'Array'].sort</title>
+<title>Open Sans fonts can break accent characters &#8211; ['Sorted', 'Array'].sort</title>
+<meta name="description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
 
-<meta name="keywords" content="about, Jekyll, theme, responsive">
+">
+<meta name="keywords" content="Fonts, Uniocde">
 
-
+  
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="About the Theme">
+<meta name="twitter:title" content="Open Sans fonts can break accent characters">
+<meta name="twitter:description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
 
+">
 <meta name="twitter:site" content="@amunda">
-<meta name="twitter:creator" content="@amunda">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="/images/sample-image-2.jpg">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About the Theme">
+<meta property="og:title" content="Open Sans fonts can break accent characters">
+<meta property="og:description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
 
-<meta property="og:url" content="/about/">
+">
+<meta property="og:url" content="/open-sans-fonts-can-break-accent-characters/">
 <meta property="og:site_name" content="['Sorted', 'Array'].sort">
 
 
 
 
 
-<link rel="canonical" href="/about/">
+<link rel="canonical" href="/open-sans-fonts-can-break-accent-characters/">
 <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="['Sorted', 'Array'].sort Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -72,7 +78,7 @@
 
 </head>
 
-<body class="page">
+<body class="post">
 
 <!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
 
@@ -107,17 +113,6 @@
 
 
 
-  <div class="image-wrap">
-  <img src=
-    
-      "/images/sample-image-2.jpg"
-    
-  alt="About the Theme feature image">
-  
-    <span class="image-credit">Photo Credit: <a href="http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/">WeGraphics</a></span>
-  
-  </div><!-- /.image-wrap -->
-
 
 <div id="main" role="main">
   <div class="article-author-side">
@@ -150,52 +145,69 @@
   
   
   
-</div>
+</div>    
   </div>
-  <article class="page">
-    <h1>About the Theme</h1>
-    <div class="article-wrap">
-      <p>Minimal Mistakes is responsive Jekyll theme with large featured images and solid typography. As the name implies the styling is fairly minimal to make it easier for you to build on top of.</p>
-
-<h2 id="minimal-mistakes-is-all-about">Minimal Mistakes is all about:</h2>
-
-<ul>
-  <li>Responsive templates. Looking good on mobile, tablet, and desktop.</li>
-  <li>Gracefully degrading in older browsers. Compatible with Internet Explorer 8+ and all modern browsers. </li>
-  <li>Minimal embellishments – content first.</li>
-  <li>Optional large feature images for posts and pages.</li>
-  <li>Simple and clear permalink structure.</li>
-  <li><a href="http://mmistakes.github.io/minimal-mistakes/404.html">Custom 404 page</a> to get you started.</li>
-  <li>Support for Disqus Comments</li>
-</ul>
-
-<p><a href="/theme-setup" class="btn">Install Minimal Mistakes Theme</a></p>
-
+  <article class="post">
+    <div class="headline-wrap">
       
-        <hr />
+        <h1><a href="/open-sans-fonts-can-break-accent-characters/" rel="bookmark" title="Open Sans fonts can break accent characters">Open Sans fonts can break accent characters</a></h1>
+      
+      <p class="byline"> Published on <time datetime="2015-01-04T23:23:54-05:00">January 04, 2015</time> by Abdul Munda.</p>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.</p>
+
+<p><img class="aligncenter wp-image-27 size-large" src="/assets/Screen-Shot-2015-01-04-at-10.39.57-PM-1024x322.png" alt="Screen Shot 2015-01-04 at 10.39.57 PM" width="640" height="201" /></p>
+
+<p>
+At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">link</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;http://fonts.googleapis.com/css?family=Open+Sans&amp;amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext&#39;</span> <span class="n">rel</span><span class="o">=</span><span class="s1">&#39;stylesheet&#39;</span> <span class="n">type</span><span class="o">=</span><span class="s1">&#39;text/css&#39;</span><span class="o">/&gt;</span><span class="p">;</span></code></pre></div>
+
+<p>We realize at this point that our data was not <a href="http://www.unicode.org/faq/normalization.html">normalized</a> and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="o">&gt;</span><span class="s2">&quot;ō&quot;</span><span class="o">.</span><span class="n">codepoints</span><span class="o">.</span><span class="n">to_a</span> <span class="o">&lt;</span><span class="sr">/span&gt; # [111, 772]&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></div>
+
+<p>The reason why we didn't see this issue in Chrome is because <a href="http://stackoverflow.com/questions/11176603/how-to-avoid-browsers-unicode-normalization-when-submitting-a-form-with-unicode">Chrome does the normalization</a> of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.</p>
+
+      <hr />
+      <footer role="contentinfo">
         <div class="social-share">
   <h4>Share on</h4>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=/about/index.html" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=/open-sans-fonts-can-break-accent-characters/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=/about/index.html" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/open-sans-fonts-can-break-accent-characters/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=/about/index.html" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=/open-sans-fonts-can-break-accent-characters/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
   </ul>
 </div><!-- /.social-share -->
-      
+        <!-- <p class="byline"><strong>Open Sans fonts can break accent characters</strong> was published on <time datetime="2015-01-04T23:23:54-05:00">January 04, 2015</time>.</p> -->
+      </footer>
     </div><!-- /.article-wrap -->
-    
-      <section id="disqus_thread"></section><!-- /#disqus_thread -->
-    
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
   </article>
-</div><!-- /#index -->
+</div><!-- /#main -->
 
 <div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/2015-02-07-using-reactjs-in-rails/" title="ReactJS in Rails">ReactJS in Rails</a></li>
+    
+      <li><a href="/handling-s3-incompletebody-error-when-using-asset_sync-gem/" title="Handling S3 IncompleteBody error when using asset_sync gem">Handling S3 IncompleteBody error when using asset_sync gem</a></li>
+    
+      <li><a href="/breakdown-of-bootstrap-plugin/" title="Breakdown of Bootstrap Plugin">Breakdown of Bootstrap Plugin</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
   <footer>
     
 
@@ -247,7 +259,7 @@
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-          
+	        
 
 </body>
 </html>

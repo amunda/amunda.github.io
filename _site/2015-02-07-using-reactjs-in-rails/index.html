@@ -5,17 +5,21 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Open Sans fonts can break accent characters &#8211; ['Sorted', 'Array'].sort</title>
-<meta name="description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
+<title>ReactJS in Rails &#8211; ['Sorted', 'Array'].sort</title>
+<meta name="description" content="Recently, I started playing around with ReactJS for one of my Rails project and was extremly 
+impressed by this library. The simplicity of the library and dividing views into components made 
+lot of sense for me 
 
 ">
-<meta name="keywords" content="Fonts, Uniocde">
+<meta name="keywords" content="assets">
 
   
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Open Sans fonts can break accent characters">
-<meta name="twitter:description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
+<meta name="twitter:title" content="ReactJS in Rails">
+<meta name="twitter:description" content="Recently, I started playing around with ReactJS for one of my Rails project and was extremly 
+impressed by this library. The simplicity of the library and dividing views into components made 
+lot of sense for me 
 
 ">
 <meta name="twitter:site" content="@amunda">
@@ -27,18 +31,20 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Open Sans fonts can break accent characters">
-<meta property="og:description" content="We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.
+<meta property="og:title" content="ReactJS in Rails">
+<meta property="og:description" content="Recently, I started playing around with ReactJS for one of my Rails project and was extremly 
+impressed by this library. The simplicity of the library and dividing views into components made 
+lot of sense for me 
 
 ">
-<meta property="og:url" content="/character%20encodings/open-sans-fonts-can-break-accent-characters/">
+<meta property="og:url" content="/2015-02-07-using-reactjs-in-rails/">
 <meta property="og:site_name" content="['Sorted', 'Array'].sort">
 
 
 
 
 
-<link rel="canonical" href="/character%20encodings/open-sans-fonts-can-break-accent-characters/">
+<link rel="canonical" href="/2015-02-07-using-reactjs-in-rails/">
 <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="['Sorted', 'Array'].sort Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -150,24 +156,18 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="/character%20encodings/open-sans-fonts-can-break-accent-characters/" rel="bookmark" title="Open Sans fonts can break accent characters">Open Sans fonts can break accent characters</a></h1>
+        <h1><a href="/2015-02-07-using-reactjs-in-rails/" rel="bookmark" title="ReactJS in Rails">ReactJS in Rails</a></h1>
       
-      <p class="byline"> Published on <time datetime="2015-01-04T23:23:54-05:00">January 04, 2015</time> by Abdul Munda.</p>
+      <p class="byline"> Published on <time datetime="2015-02-07T00:00:00-05:00">February 07, 2015</time> by Abdul Munda.</p>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>We recently added Open Sans fonts to our application and started seeing that accent characters for some languages weren't properly rendering in Firefox. Accent characters were slightly right of the main character.</p>
+      <p>Recently, I started playing around with ReactJS for one of my Rails project and was extremly 
+impressed by this library. The simplicity of the library and dividing views into components made 
+lot of sense for me </p>
 
-<p><img class="aligncenter wp-image-27 size-large" src="/assets/Screen-Shot-2015-01-04-at-10.39.57-PM-1024x322.png" alt="Screen Shot 2015-01-04 at 10.39.57 PM" width="640" height="201" /></p>
+<p><strong>What is ReactJS</strong></p>
 
-<p>
-At first, we thought that this could be because we were missing a charset, so we decided to add all the character sets Open Sans provides.</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">link</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;http://fonts.googleapis.com/css?family=Open+Sans&amp;amp;subset=latin,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext&#39;</span> <span class="n">rel</span><span class="o">=</span><span class="s1">&#39;stylesheet&#39;</span> <span class="n">type</span><span class="o">=</span><span class="s1">&#39;text/css&#39;</span><span class="o">/&gt;</span><span class="p">;</span></code></pre></div>
-
-<p>We realize at this point that our data was not <a href="http://www.unicode.org/faq/normalization.html">normalized</a> and what was happening is that Open Sans was trying to render two separate characters (an accent character and the main character) and the accent character was not present in Open Sans charset.</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="o">&gt;</span><span class="s2">&quot;ō&quot;</span><span class="o">.</span><span class="n">codepoints</span><span class="o">.</span><span class="n">to_a</span> <span class="o">&lt;</span><span class="sr">/span&gt; # [111, 772]&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></div>
-
-<p>The reason why we didn't see this issue in Chrome is because <a href="http://stackoverflow.com/questions/11176603/how-to-avoid-browsers-unicode-normalization-when-submitting-a-form-with-unicode">Chrome does the normalization</a> of characters to NFC on render. We fixed this issue by normalizing our data on backend before we pass it to our Rails app.</p>
 
       <hr />
       <footer role="contentinfo">
@@ -175,17 +175,17 @@ At first, we thought that this could be because we were missing a charset, so we
   <h4>Share on</h4>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=/character%20encodings/open-sans-fonts-can-break-accent-characters/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=/2015-02-07-using-reactjs-in-rails/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=/character%20encodings/open-sans-fonts-can-break-accent-characters/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/2015-02-07-using-reactjs-in-rails/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=/character%20encodings/open-sans-fonts-can-break-accent-characters/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=/2015-02-07-using-reactjs-in-rails/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
   </ul>
 </div><!-- /.social-share -->
-        <!-- <p class="byline"><strong>Open Sans fonts can break accent characters</strong> was published on <time datetime="2015-01-04T23:23:54-05:00">January 04, 2015</time>.</p> -->
+        <!-- <p class="byline"><strong>ReactJS in Rails</strong> was published on <time datetime="2015-02-07T00:00:00-05:00">February 07, 2015</time>.</p> -->
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -199,11 +199,11 @@ At first, we thought that this could be because we were missing a charset, so we
   <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="/ruby/handling-s3-incompletebody-error-when-using-asset_sync-gem/" title="Handling S3 IncompleteBody error when using asset_sync gem">Handling S3 IncompleteBody error when using asset_sync gem</a></li>
+      <li><a href="/handling-s3-incompletebody-error-when-using-asset_sync-gem/" title="Handling S3 IncompleteBody error when using asset_sync gem">Handling S3 IncompleteBody error when using asset_sync gem</a></li>
     
-      <li><a href="/javascript/breakdown-of-bootstrap-plugin/" title="Breakdown of Bootstrap Plugin">Breakdown of Bootstrap Plugin</a></li>
+      <li><a href="/breakdown-of-bootstrap-plugin/" title="Breakdown of Bootstrap Plugin">Breakdown of Bootstrap Plugin</a></li>
     
-      <li><a href="/ruby/jruby-performance-beware-of-rails/" title="JRuby Performance: Beware of Rails deprecated warnings">JRuby Performance: Beware of Rails deprecated warnings</a></li>
+      <li><a href="/open-sans-fonts-can-break-accent-characters/" title="Open Sans fonts can break accent characters">Open Sans fonts can break accent characters</a></li>
     
     </ul>
     <hr />
@@ -218,6 +218,22 @@ At first, we thought that this could be because we were missing a charset, so we
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/assets/js/scripts.min.js"></script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-58157096-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 
 
   
