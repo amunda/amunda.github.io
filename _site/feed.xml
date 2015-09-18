@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-02-07T22:15:32-05:00</updated>
+<updated>2015-09-17T22:17:23-04:00</updated>
 <id>/</id>
 <author>
   <name>Abdul Munda</name>
@@ -16,25 +16,23 @@
   
 
 <entry>
-  <title type="html"><![CDATA[ReactJS in Rails]]></title>
-  <link rel="alternate" type="text/html" href="/2015-02-07-using-reactjs-in-rails/" />
-  <id>/2015-02-07-using-reactjs-in-rails</id>
-  <published>2015-02-07T00:00:00-05:00</published>
-  <updated>2015-02-07T00:00:00-05:00</updated>
+  <title type="html"><![CDATA[Microservices Track notes from QCon Newyork 2015]]></title>
+  <link rel="alternate" type="text/html" href="/microservices-at-qcon/" />
+  <id>/microservices-at-qcon</id>
+  <published>2015-09-16T10:40:18-04:00</published>
+  <updated>2015-09-16T10:40:18-04:00</updated>
   <author>
     <name></name>
     <uri></uri>
     
   </author>
   <content type="html">
-    &lt;p&gt;Recently, I started playing around with ReactJS for one of my Rails project and was extremly 
-impressed by this library. The simplicity of the library and dividing views into components made 
-lot of sense for me &lt;/p&gt;
+    &lt;p&gt;I had an opportunity to goto &lt;a href=&quot;&quot;&gt;QCon&lt;/a&gt; in New York during the summer. It was a great conference from both the quality of speakers and the quality of ammeneties provided by the conference organizers. One of the best track from the conference was on Microservices and here is the collection of notes and learnings from this track.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;What is ReactJS&lt;/strong&gt;&lt;/p&gt;
+&lt;iframe src=&quot;//www.slideshare.net/slideshow/embed_code/key/xH2Djd0IuOxgHo&quot; width=&quot;595&quot; height=&quot;485&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt;
+&lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;//www.slideshare.net/AbdulBasitMunda/qcon-2015-microservices-track-notes&quot; title=&quot;QCon 2015 - Microservices Track Notes &quot; target=&quot;_blank&quot;&gt;QCon 2015 - Microservices Track Notes &lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&quot;//www.slideshare.net/AbdulBasitMunda&quot; target=&quot;_blank&quot;&gt;Abdul Basit Munda&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
 
-
-    &lt;p&gt;&lt;a href=&quot;/2015-02-07-using-reactjs-in-rails/&quot;&gt;ReactJS in Rails&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on February 07, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/microservices-at-qcon/&quot;&gt;Microservices Track notes from QCon Newyork 2015&lt;/a&gt; was originally published by Abdul Munda at &lt;a href=&quot;&quot;&gt;['Sorted', 'Array'].sort&lt;/a&gt; on September 16, 2015.&lt;/p&gt;
   </content>
 </entry>
 
