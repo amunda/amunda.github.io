@@ -20,14 +20,14 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: false
+  enable_coderay: false
 
 
 # Site owner
 owner:
   name: Abdul Munda
   avatar: bio-photo.png
-  bio: "I am Abdul Munda from Toronto, Canada. I am a father, husband, full-stack Rails developer and entrepreneur. Love to build and learn new things."
+  bio: "I am Abdul Munda from Toronto, Canada. I am a father, husband, full-stack developer and entrepreneur. Technologies I am most interested in are Ruby on Rails, NodeJS and React"
   email: 
   disqus-shortname: sortedarray
   twitter: amunda

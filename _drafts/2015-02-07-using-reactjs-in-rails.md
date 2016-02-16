@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ReactJS in Rails
-date: 2015-02-07
+date: 2015-12-12
 categories:
 - Ruby
 tags:
